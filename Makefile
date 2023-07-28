@@ -6,16 +6,16 @@
 #    By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/25 16:30:48 by zhlim             #+#    #+#              #
-#    Updated: 2023/07/27 15:02:22 by zhlim            ###   ########.fr        #
+#    Updated: 2023/07/28 17:44:19 by zhlim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS			= push_swap.c
+SRCS			= $(addsuffix .c, push_swap validate_args build_and_destroy_stacks error_handling)
 
 OBJS			= $(patsubst %.c, %.o, $(SRCS))
 
 CC				= gcc
-CFLAGS			= -Wall -Werror -Wextra -g3
+CFLAGS			= -Wall -Werror -Wextra -g -fsanitize=address
 
 RM				= rm -f
 
@@ -45,7 +45,7 @@ $(LIBPRINTF):
 				make -C libft/ft_printf/
 
 clean:		
-				$(RM) $(OBJ)
+				$(RM) $(OBJS)
 				make clean -C libft/
 				make clean -C libft/ft_printf/
 				

@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/25 13:40:20 by zhlim             #+#    #+#             */
-/*   Updated: 2023/07/28 17:50:37 by zhlim            ###   ########.fr       */
+/*   Created: 2023/07/28 17:38:26 by zhlim             #+#    #+#             */
+/*   Updated: 2023/07/28 17:59:41 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int ac, char **av)
+void    print_error_exit(char *str)
 {
-	t_list	*stack_a;
+    ft_printf("%s", str);
+    exit(1);
+}
 
-	if (!validate_args(ac, av))
-		return (1);
-	stack_a = build_stack_a(ac, av);
-	check_dup(stack_a);
-	ft_lstclear(&stack_a, destroy_content);
-	return (0);
+void    free_error_exit(char *str, t_list *stack)
+{
+    ft_printf("%s", str);
+    ft_lstclear(&stack, destroy_content);
+    exit(1);
 }

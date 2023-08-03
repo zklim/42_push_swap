@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/28 17:38:26 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/01 12:46:45 by zhlim            ###   ########.fr       */
+/*   Created: 2023/08/01 18:04:09 by zhlim             #+#    #+#             */
+/*   Updated: 2023/08/03 12:11:13 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    print_error_exit(char *str)
+int extract_number(t_content *content)
 {
-    ft_printf("%s", str);
-    exit(1);
+    return (content->number);
 }
 
-void    free_error_exit(char *str, t_list *stack)
+int extract_index(t_content *content)
 {
-    ft_printf("%s", str);
-    ft_lstclear(&stack, destroy_content);
-    exit(1);
+    return (content->index);
+}
+
+void    sort(t_list **stack_a, t_list **stack_b)
+{
+    int a;
+    int b;
+    
+    a = extract_number((*stack_a)->content);
+    b = extract_number((*stack_a)->next->content);P
+    if ((a & 1) == 0)
+    {
+        push(stack_a, stack_b, "pb\n");
+    }
 }

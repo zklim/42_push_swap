@@ -6,11 +6,12 @@
 #    By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/25 16:30:48 by zhlim             #+#    #+#              #
-#    Updated: 2023/07/28 17:44:19 by zhlim            ###   ########.fr        #
+#    Updated: 2023/08/01 18:04:05 by zhlim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS			= $(addsuffix .c, push_swap validate_args build_and_destroy_stacks error_handling)
+SRCS			= $(addsuffix .c, push_swap validate_args build_and_destroy_stacks error_handling operations run_operations \
+					sort)
 
 OBJS			= $(patsubst %.c, %.o, $(SRCS))
 

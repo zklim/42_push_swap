@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 18:04:09 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/03 12:11:13 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/03 12:13:43 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void    sort(t_list **stack_a, t_list **stack_b)
     int b;
     
     a = extract_number((*stack_a)->content);
-    b = extract_number((*stack_a)->next->content);P
+    b = extract_number((*stack_a)->next->content);
     if ((a & 1) == 0)
     {
         push(stack_a, stack_b, "pb\n");

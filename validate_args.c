@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:33:10 by zhlim             #+#    #+#             */
-/*   Updated: 2023/07/28 18:07:46 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/03 15:35:27 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void	check_dup(t_list *stack)
 {
-	t_list		*top;
-	t_list		*loop;
-	t_content	*l_content;
-	t_content	*s_content;
+	t_list	*top;
+	t_list	*loop;
 
 	top = stack;
 	while (stack)
@@ -25,16 +23,14 @@ void	check_dup(t_list *stack)
 		loop = top;
 		while (loop)
 		{
-			l_content = loop->content;
-			s_content = stack->content;
-			if (l_content->index == s_content->index)
+			if (extract_index(loop->content) == extract_index(stack->content))
 			{
 				loop = loop->next;
 				if (!loop)
 					break ;
-				l_content = loop->content;
 			}
-			else if (l_content->number == s_content->number)
+			else if (extract_number(loop->content)
+				== extract_number(stack->content))
 				free_error_exit("Error\nDuplicate number found\n", top);
 			loop = loop->next;
 		}

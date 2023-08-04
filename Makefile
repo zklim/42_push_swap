@@ -6,23 +6,27 @@
 #    By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/25 16:30:48 by zhlim             #+#    #+#              #
-#    Updated: 2023/08/04 15:12:02 by zhlim            ###   ########.fr        #
+#    Updated: 2023/08/04 16:35:40 by zhlim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS			= $(addsuffix .c, push_swap validate_args build_and_destroy_stacks error_handling operations run_operations \
 					sort_positive sort_negative)
+SRCB			= $(addsuffix .c, checker validate_args build_and_destroy_stacks error_handling operations run_operations \
+					sort_positive sort_negative run_checker) $(addprefix libft/get_next_line/, $(addsuffix .c, get_next_line get_next_line_utils))
 
 OBJS			= $(patsubst %.c, %.o, $(SRCS))
+OBJB			= $(patsubst %.c, %.o, $(SRCB))
 
 CC				= gcc
 CFLAGS			= -Wall -Werror -Wextra -g -fsanitize=address
 
 RM				= rm -f
 
-INCLUDES		= -I. -Ilibft -Ilibft/ft_printf/include/
+INCLUDES		= -I. -Ilibft -Ilibft/ft_printf/include/ -Ilibft/get_next_line
 
 NAME			= push_swap
+NAMEB			= checker
 
 LIBFT			= libft/libft.a
 LIBFTFLAGS		= -Llibft/ -lft
@@ -30,14 +34,20 @@ LIBPRINTF		= libft/ft_printf/libftprintf.a
 LIBPRINTFFLAGS	= -Llibft/ft_printf -lftprintf
 
 %.o:			%.c
-				$(CC) $(CFLAGS) -c $< -o $@
-
-all:			$(NAME)
+				$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME):		$(OBJS)
 				$(CC) $(CFLAGS) $^ $(LIBFTFLAGS) $(LIBPRINTFFLAGS) -o $@
 
+$(NAMEB):		$(OBJB)
+				$(CC) $(CFLAGS) $^ $(LIBFTFLAGS) $(LIBPRINTFFLAGS) -o $@
+				
+all:			$(NAME) bonus
+
+bonus:			$(NAMEB)
+
 $(OBJS):		$(LIBFT) $(LIBPRINTF)
+$(OBJB):		$(LIBFT) $(LIBPRINTF)
 
 $(LIBFT):		
 				make bonus -C libft/
@@ -46,15 +56,15 @@ $(LIBPRINTF):
 				make -C libft/ft_printf/
 
 clean:		
-				$(RM) $(OBJS)
+				$(RM) $(OBJS) $(OBJB)
 				make clean -C libft/
 				make clean -C libft/ft_printf/
 				
 fclean:			clean
-				$(RM) $(NAME)
+				$(RM) $(NAME) $(NAMEB)
 				make fclean -C libft/
 				make fclean -C libft/ft_printf/
 
 re:				fclean all
 
-.PHONY:			all clean fclean re
+.PHONY:			all clean fclean re bonus

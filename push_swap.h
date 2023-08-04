@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:41:00 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/04 15:12:28 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/04 17:31:18 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ void	sort_positive(t_list **stack_a, t_list **stack_b, int size, int bit);
 int		check_negative(t_list **stack_a);
 void	push_back(t_list **stack_a, t_list **stack_b);
 int		check_sorted(t_list *stack_a);
+void	free_args(char **args);
 
 #endif

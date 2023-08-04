@@ -6,11 +6,24 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:38:26 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/04 15:29:51 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/04 17:31:06 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	free_args(char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i])
+	{
+		free(args[i]);
+		i++;
+	}
+	free(args);
+}
 
 void	write_error(char *str)
 {

@@ -6,7 +6,7 @@
 #    By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/25 16:30:48 by zhlim             #+#    #+#              #
-#    Updated: 2023/08/04 16:35:40 by zhlim            ###   ########.fr        #
+#    Updated: 2023/08/04 17:15:29 by zhlim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ OBJS			= $(patsubst %.c, %.o, $(SRCS))
 OBJB			= $(patsubst %.c, %.o, $(SRCB))
 
 CC				= gcc
-CFLAGS			= -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS			= -Wall -Werror -Wextra
+# -g -fsanitize=address
 
 RM				= rm -f
 

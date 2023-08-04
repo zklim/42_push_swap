@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:35:28 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/04 14:09:02 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/04 17:23:28 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_list	*build_stack_a(char **args)
 		if (i == 0)
 			stack_a = tmp;
 		if (!content || !tmp)
-			free_error_exit("Error\nFailed to malloc\n", stack_a);
+			free_error_exit("Error\n", stack_a);
 		if (i != 0)
 			ft_lstadd_back(&stack_a, tmp);
 		i++;

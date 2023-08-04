@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:33:10 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/04 15:14:16 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/04 18:14:54 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	check_dup(t_list *stack)
 			}
 			else if (extract_number(loop->content)
 				== extract_number(stack->content))
-				free_error_exit("Error\nDuplicate number found\n", top);
+				free_error_exit("Error\n", top);
 			loop = loop->next;
 		}
 		stack = stack->next;
@@ -61,7 +61,7 @@ void	check_int(char *number)
 	}
 	if (number[i] != '\0' || (nbr * sign) < -2147483648 || (nbr
 			* sign) > 2147483647)
-		print_error_exit("Error\nNumber format not accepted\n");
+		print_error_exit("Error\n");
 }
 
 char	**validate_args(int ac, char **av)
@@ -71,11 +71,11 @@ char	**validate_args(int ac, char **av)
 
 	i = 0;
 	if (ac < 2)
-		return (0);
+		exit(0);
 	if (ac == 2)
 	{
 		if (!ft_strchr(av[1], ' '))
-			print_error_exit("Error\nNumber format not accepted\n");
+			check_int(av[1]);
 		args = ft_split(av[1], ' ');
 	}
 	else

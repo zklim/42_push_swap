@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   sort_positive.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 18:04:09 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/03 15:24:24 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/04 15:10:52 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	push_back(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-void	sort(t_list **stack_a, t_list **stack_b, int size, int bit)
+void	sort_positive(t_list **stack_a, t_list **stack_b, int size, int bit)
 {
 	t_list	*tmp;
 	int		nbr;
@@ -67,12 +67,17 @@ void	sort(t_list **stack_a, t_list **stack_b, int size, int bit)
 	{
 		nbr = extract_number(tmp->content);
 		tmp = tmp->next;
-		if ((nbr & 1 << bit) == 0)
-			push(stack_a, stack_b, "pb\n");
+		if ((nbr & 1 << 31) == 0)
+		{
+			if ((nbr & 1 << bit) == 0)
+				push(stack_a, stack_b, "pb\n");
+			else
+				single_rotate(stack_a, "ra\n");
+		}
 		else
 			single_rotate(stack_a, "ra\n");
 		i++;
 	}
 	push_back(stack_a, stack_b);
-	sort(stack_a, stack_b, size, ++bit);
+	sort_positive(stack_a, stack_b, size, ++bit);
 }

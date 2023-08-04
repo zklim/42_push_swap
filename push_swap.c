@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:40:20 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/03 15:23:38 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/04 15:13:49 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,17 @@ int	main(int ac, char **av)
 {
 	t_list	*stack_a;
 	t_list	*stack_b;
+	char	**args;
 	int		size;
 
-	if (!validate_args(ac, av))
-		return (1);
-	stack_a = build_stack_a(ac, av);
+	args = validate_args(ac, av);
+	stack_a = build_stack_a(args);
 	stack_b = NULL;
 	check_dup(stack_a);
-	print_stack(stack_a);
-	size = extract_index((ft_lstlast(stack_a))->content);
-	sort(&stack_a, &stack_b, size, 0);
-	print_stack(stack_a);
+	size = extract_index((ft_lstlast(stack_a))->content) + 1;
+	sort_positive(&stack_a, &stack_b, size, 0);
+	if (check_negative(&stack_a))
+		sort_negative(&stack_a, &stack_b, size, 0);
 	ft_lstclear(&stack_a, destroy_content);
 	return (0);
 }

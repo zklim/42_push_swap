@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:41:00 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/03 15:25:10 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/04 15:12:28 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ typedef struct s_content
 	int	number;
 }		t_content;
 
-int		validate_args(int ac, char **av);
+char	**validate_args(int ac, char **av);
 void	destroy_content(void *content);
-t_list	*build_stack_a(int ac, char **av);
+t_list	*build_stack_a(char **args);
 void	print_error_exit(char *str);
 void	free_error_exit(char *str, t_list *stack);
 void	check_dup(t_list *stack);
@@ -40,6 +40,10 @@ void	double_reverse_rotate(t_list **stack_a, t_list **stack_b, char *str);
 void	push(t_list **stack_pop, t_list **stack_push, char *str);
 int		extract_index(t_content *content);
 int		extract_number(t_content *content);
-void	sort(t_list **stack_a, t_list **stack_b, int size, int bit);
+void	sort_negative(t_list **stack_a, t_list **stack_b, int size, int bit);
+void	sort_positive(t_list **stack_a, t_list **stack_b, int size, int bit);
+int		check_negative(t_list **stack_a);
+void	push_back(t_list **stack_a, t_list **stack_b);
+int		check_sorted(t_list *stack_a);
 
 #endif

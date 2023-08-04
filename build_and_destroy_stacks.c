@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:35:28 by zhlim             #+#    #+#             */
-/*   Updated: 2023/07/28 17:59:55 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/04 14:09:02 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,23 @@ t_content	*build_content(char *num, int index)
 	return (content);
 }
 
-t_list	*build_stack_a(int ac, char **av)
+t_list	*build_stack_a(char **args)
 {
 	t_list		*stack_a;
 	t_list		*tmp;
 	t_content	*content;
 	int			i;
 
-	i = 1;
-	while (i < ac)
+	i = 0;
+	while (args[i])
 	{
-		content = build_content(av[i], i);
+		content = build_content(args[i], i);
 		tmp = ft_lstnew(content);
-		if (i == 1)
+		if (i == 0)
 			stack_a = tmp;
 		if (!content || !tmp)
 			free_error_exit("Error\nFailed to malloc\n", stack_a);
-		if (i > 1)
+		if (i != 0)
 			ft_lstadd_back(&stack_a, tmp);
 		i++;
 	}

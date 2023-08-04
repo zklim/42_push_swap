@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:33:10 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/03 15:35:27 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/04 15:14:16 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,26 @@ void	check_int(char *number)
 		print_error_exit("Error\nNumber format not accepted\n");
 }
 
-int	validate_args(int ac, char **av)
+char	**validate_args(int ac, char **av)
 {
-	int	i;
+	int		i;
+	char	**args;
 
-	i = 1;
+	i = 0;
 	if (ac < 2)
 		return (0);
-	while (i < ac)
+	if (ac == 2)
 	{
-		check_int(av[i]);
+		if (!ft_strchr(av[1], ' '))
+			print_error_exit("Error\nNumber format not accepted\n");
+		args = ft_split(av[1], ' ');
+	}
+	else
+		args = av + 1;
+	while (args[i])
+	{
+		check_int(args[i]);
 		i++;
 	}
-	return (1);
+	return (args);
 }

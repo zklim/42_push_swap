@@ -6,33 +6,22 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 12:51:37 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/03 15:24:16 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/05 14:34:01 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_list *stack)
+void	swap(t_list **stack)
 {
 	t_list		*tmp;
-	t_content	*content;
-	int			i;
 
-	i = 0;
-	tmp = stack;
-	while (1)
-	{
-		if (i == 2)
-			break ;
-		if (!tmp && i < 2)
-			ft_printf("stack less than 1\n");
+	tmp = (*stack)->next;
+	if (!tmp)
 		return ;
-		i++;
-		tmp = tmp->next;
-	}
-	content = stack->content;
-	stack->content = stack->next->content;
-	stack->next->content = content;
+	(*stack)->next = tmp->next;
+	tmp->next = *stack;
+	*stack = tmp;
 }
 
 void	push(t_list **stack_pop, t_list **stack_push, char *str)

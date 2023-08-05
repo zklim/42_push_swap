@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:01:16 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/04 16:57:06 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/05 18:24:41 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	check_command(char *line, t_list **stack_a, t_list **stack_b)
 	{
 		line++;
 		if (*line == 'a')
-			single_swap(*stack_a, "sa\n");
+			single_swap(stack_a, "sa\n");
 		if (*line == 'b')
-			single_swap(*stack_b, "sb\n");
+			single_swap(stack_b, "sb\n");
 		if (*line == 's')
-			double_swap(*stack_a, *stack_b, "ss\n");
+			double_swap(stack_a, stack_b, "ss\n");
 	}
 	else if (*line == 'p')
 	{

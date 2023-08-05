@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:35:28 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/04 17:23:28 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/05 18:19:34 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ t_list	*build_stack_a(char **args)
 	while (args[i])
 	{
 		content = build_content(args[i], i);
+		if (!content)
+			free_exit(stack_a);
 		tmp = ft_lstnew(content);
 		if (i == 0)
 			stack_a = tmp;

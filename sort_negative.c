@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 15:11:05 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/04 15:14:41 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/05 14:10:09 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	sort_negative(t_list **stack_a, t_list **stack_b, int size, int bit)
 	sort_negative(stack_a, stack_b, size, ++bit);
 }
 
-int	check_negative(t_list **stack_a)
+int	has_negative(t_list **stack_a)
 {
 	t_list	*tmp;
 	int		nbr;

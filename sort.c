@@ -6,53 +6,68 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:22:56 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/07 09:23:08 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/07 12:05:57 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_3(t_list **stack_a)
+void	loop_b(t_list *stack_a, t_list *stack_b)
 {
-	int	nbr;
+	t_content	*content_a;
+	t_content	*content_b;
+	int			diff;
 
+	content_a = stack_a->content;
+	content_b = stack_b->content;
+	while (stack_b)
+	{
+		diff = content_a->number - content_b->number;
+		if (stack_b->next)
+		{
+			content_b = stack_b->next->content;
+			if (diff > content_a->number - content_b->number)
+			{
+				content_a->rb++;
+				content_a->cost++;
+			}
+		}
+		stack_b = stack_b->next;
+	}
+}
+
+void	calculate_cost(t_list *stack_a, t_list *stack_b)
+{
+	t_content	*content;
+
+	while (stack_a)
+	{
+		loop_b(stack_a, stack_b);
+		stack_a = stack_a->next;
+		content = stack_a->content;
+		content->ra++;
+		content->cost++;
+	}
+
+}
+
+void	optimised_push(t_list **stack_a, t_list **stack_b)
+{
+	while (size_of(*stack_a) != 3)
+	{
+		calculate_cost(*stack_a, *stack_b);
+	}
+}
+
+void	set_head(t_list **stack_a, int size)
+{
 	while (!check_sorted(*stack_a))
 	{
-		nbr = extract_number((*stack_a)->content);
-		if (nbr > extract_number(ft_lstlast(*stack_a)->content))
+		if (smallest_pos(*stack_a, size))
 			single_rotate(stack_a, "ra\n");
-		else if (nbr > extract_number((*stack_a)->next->content))
-			single_swap(stack_a, "sa\n");
 		else
-			single_rotate(stack_a, "ra\n");
+			single_reverse_rotate(stack_a, "rra\n");
 	}
-}
-
-void	search_position(t_list *stack, t_content *content)
-{
-	int	diff;
-	int	i;
-
-	i = 0;
-	content->diff = content->number;
-	while (stack)
-	{
-		diff = content->number - extract_number(stack->content);
-		if (diff > 0 && content->diff > diff)
-		{
-			content->diff = diff;
-			content->pos = i;
-		}
-		i++;
-		stack = stack->next;
-	}
-}
-
-void	push_back_a(t_list **stack_a, t_list **stack_b, t_content *content)
-{
-	while (content->pos--)
-		single_rotate(stack_a, "ra\n");
-	push(stack_b, stack_a, "pa\n");
 }
 
 void	sort_advance(t_list **stack_a, t_list **stack_b, int size)
@@ -64,4 +79,17 @@ void	sort_advance(t_list **stack_a, t_list **stack_b, int size)
 		search_position(*stack_a, (*stack_b)->content);
 		push_back_a(stack_a, stack_b, (*stack_b)->content);
 	}
+	else
+	{
+		push(stack_a, stack_b, "pb\n");
+		push(stack_a, stack_b, "pb\n");
+		optimised_push(stack_a, stack_b);
+		sort_3(stack_a);
+		while (*stack_b)
+		{
+			search_position(*stack_a, (*stack_b)->content);
+			push_back_a(stack_a, stack_b, (*stack_b)->content);
+		}
+	}
+	set_head(stack_a, size);
 }

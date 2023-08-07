@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:35:28 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/05 18:19:34 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/07 11:47:12 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ t_content	*build_content(char *num, int index)
 		return (NULL);
 	content->number = ft_atoi(num);
 	content->index = index;
+	content->diff = 0;
+	content->pos = 0;
+	content->smallest = 0;
+	content->cheapest = 0;
+	content->cost = 0;
+	content->ra = 0;
+	content->rb = 0;
 	return (content);
 }
 

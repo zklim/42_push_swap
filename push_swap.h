@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:41:00 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/07 09:23:29 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/07 11:46:51 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ typedef struct s_content
 	int	number;
 	int	pos;
 	int	diff;
+	int	smallest;
+	int	ra;
+	int	rb;
+	int	cost;
+	int	cheapest;
 }		t_content;
 
 char	**validate_args(int ac, char **av);
@@ -52,5 +57,10 @@ void	free_exit(t_list *stack);
 void	print_stack(t_list *stack);
 void	sort_advance(t_list **stack_a, t_list **stack_b, int size);
 void	sort_3(t_list **stack_a);
+int		size_of(t_list *stack);
+void	search_smallest(t_list *tmp, t_content *content);
+void	search_position(t_list *stack, t_content *content);
+void	push_back_a(t_list **stack_a, t_list **stack_b, t_content *content);
+int		smallest_pos(t_list *stack_a, int size);
 
 #endif

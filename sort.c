@@ -6,198 +6,108 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:22:56 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/07 18:17:46 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/07 22:44:49 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	loop_half(t_content *content, t_list *stack_b, int loops)
-{
-	int		i;
-	int		a;
-	int		b;
-
-	i = 0;
-	a = content->number;
-	while (i < loops)
-	{
-		b = extract_number(stack_b->content);
-		content->diff = a - b;
-		if (stack_b->next && content->diff > a - extract_number(stack_b->next->content))
-			content->rb = i;
-		stack_b = stack_b->next;
-		i++;
-	}
-}
-
-void	loop_second_half(t_content *content, t_list *stack_b, int size, int loops)
-{
-	int		i;
-	int		a;
-	int		b;
-
-	i = 0;
-	a = content->number;
-	while (i++ < loops)
-		stack_b = stack_b->next;
-	while (loops < size)
-	{
-		b = extract_number(stack_b->content);
-		content->diff = a - b;
-		if (stack_b->next && content->diff > a - extract_number(stack_b->next->content))
-			content->rrb = i - 1;
-		i--;
-		loops++;
-	}
-}
-
-void	loop_half_rev(t_content *content, t_list *stack_b, int loops)
-{
-	int		i;
-	int		a;
-	int		b;
-
-	i = 0;
-	a = content->number;
-	while (i < loops)
-	{
-		b = extract_number(stack_b->content);
-		content->diff = a - b;
-		if (stack_b->next && content->diff < a - extract_number(stack_b->next->content))
-			content->rb = i;
-		stack_b = stack_b->next;
-		i++;
-	}
-}
-
-void	loop_second_half_rev(t_content *content, t_list *stack_b, int size, int loops)
-{
-	int		i;
-	int		a;
-	int		b;
-
-	i = 0;
-	a = content->number;
-	while (i++ < loops)
-		stack_b = stack_b->next;
-	while (loops < size)
-	{
-		b = extract_number(stack_b->content);
-		content->diff = a - b;
-		if (stack_b->next && content->diff < a - extract_number(stack_b->next->content))
-			content->rrb = i - 1;
-		i--;
-		loops++;
-	}
-}
-
-void	set_double_cost(t_content *content, int ra)
-{
-	if (ra)
-	{
-		if (content->rb)
-		{
-			while (ra && content->rb)
-			{
-				content->rr++;
-				content->rb--;
-				ra--;
-			}
-		}
-		content->ra = ra;
-	}
-}
-
-int	cost_calculation(t_list *stack_a, t_list *stack_b, int size, int loops)
+void	init_cost(t_list *stack_a, t_list *stack_b, t_op *op)
 {
 	t_content	*content;
-	int			lowest_cost;
-	int			i;
-	int			to_push;
 
-	i = 0;
-	while (stack_a)
+	op->biggest = extract_number(stack_b->content);
+	op->smallest = extract_number(stack_b->next->content);
+	op->big_index = 0;
+	if (op->biggest < op->smallest)
 	{
-		content = stack_a->content;
-		loop_half(content, stack_b, loops);
-		loop_second_half(content, stack_b, size, loops);
-		if (content->diff < 0)
-		{
-			loop_half_rev(content, stack_b, loops);
-			loop_second_half_rev(content, stack_b, size, loops);
-		}
-		if (content->rb >= content->rrb)
-			content->cost = content->rb;
-		else
-			content->cost = content->rrb;
-		set_double_cost(content, i);
-		if (i == 0 || content->cost < lowest_cost)
-		{
-			lowest_cost = content->cost;
-			to_push = i;
-		}
-		if (i > lowest_cost)
-			break ;
-		i++;
-		stack_a = stack_a->next;
+		op->biggest = extract_number(stack_b->next->content);
+		op->smallest = extract_number(stack_b->content);
+		op->big_index = 1;
 	}
-	return (to_push);
+	content = stack_a->content;
+	if (content->number < op->smallest)
+	{
+		op->cheapest = op->big_index;
+		content->rb = op->big_index;
+		op->smallest = content->number;
+	}
+	else
+		op->cheapest = 0;
+	op->to_push = 0;
 }
 
-void	run_push(t_list **stack_a, t_list **stack_b, t_content *content)
+// void	cost_calculation(t_list *stack_a, t_list *stack_b, t_op *op)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (i < op->cheapest)
+// 	{
+		
+// 		i++;
+// 	}
+// }
+
+void	run_op(t_list **stack_a, t_list **stack_b, t_content *content)
 {
-	if (content->rr--)
-		double_rotate(stack_a, stack_b, "rr\n");
-	else if (content->ra--)
+	if (content->ra)
+	{
 		single_rotate(stack_a, "ra\n");
-	else if (content->rb--)
+		content->ra--;
+	}
+	else if (content->rb)
+	{
 		single_rotate(stack_b, "rb\n");
-	else if (content->rra--)
+		content->rb--;
+	}
+	else if (content->rr)
+	{
+		double_rotate(stack_a, stack_b, "rr\n");
+		content->rr--;
+	}
+	else if (content->rra)
+	{
 		single_reverse_rotate(stack_a, "rra\n");
-	else if (content->rrb--)
-		single_reverse_rotate(stack_b, "rrb\n");
-	else if (content->rrr--)
+		content->rra--;
+	}
+	else if (content->rrb)
+	{
+		single_reverse_rotate(stack_a, "rrb\n");
+		content->rrb--;
+	}
+	else if (content->rrr)
+	{
 		double_reverse_rotate(stack_a, stack_b, "rrr\n");
+		content->rrr--;
+	}
 	else
 	{
 		push(stack_a, stack_b, "pb\n");
 		return ;
 	}
-	run_push(stack_a, stack_b, content);
+	run_op(stack_a, stack_b, content);
 }
 
 void	push_b(t_list **stack_a, t_list **stack_b, int to_push)
 {
-	t_list		*tmp;
-	t_content	*content;
+	t_list	*tmp;
 
 	tmp = *stack_a;
 	while (to_push--)
 		tmp = tmp->next;
-	content = tmp->content;
-	run_push(stack_a, stack_b, content);
+	run_op(stack_a, stack_b, tmp->content);
 }
 
 void	optimised_push(t_list **stack_a, t_list **stack_b)
 {
-	int		size;
-	int		loops;
-	int		to_push;
+	t_op	op;
 
-	loops = 1;
-	size = 2;
+	init_cost(*stack_a, *stack_b, &op);
 	while (size_of(*stack_a) != 3)
 	{
-		to_push = cost_calculation(*stack_a, *stack_b, size, loops);
-		push_b(stack_a, stack_b, to_push);
-		size = size_of(*stack_b);
-		if (size % 2 == 0)
-			loops = size / 2;
-		else
-			loops = (size / 2) + 1;
-		print_stack(*stack_a);
-		print_stack(*stack_b);
+		// cost_calculation(*stack_a, *stack_b, &op);
+		push_b(stack_a, stack_b, op.to_push);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 10:58:17 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/07 17:40:11 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/07 22:47:07 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,24 @@ void	search_smallest(t_list *tmp, t_content *content)
 	}
 }
 
-void	search_position(t_list *stack, t_content *content)
+void	search_position(t_list *stack_a, t_content *content_b)
 {
 	t_list	*tmp;
 	int		i;
 
 	i = 0;
-	tmp = stack;
-	while (stack)
+	tmp = stack_a;
+	while (stack_a)
 	{
-		if (content->number < extract_number(stack->content))
+		if (content_b->number < extract_number(stack_a->content))
 		{
-			content->pos = i;
+			content_b->pos = i;
 			return ;
 		}
 		i++;
-		stack = stack->next;
+		stack_a = stack_a->next;
 	}
-	search_smallest(tmp, content);
+	search_smallest(tmp, content_b);
 }
 
 void	push_back_a(t_list **stack_a, t_list **stack_b, t_content *content)

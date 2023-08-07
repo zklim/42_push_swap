@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:41:00 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/07 16:23:11 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/07 22:03:37 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ typedef struct s_content
 	int	cost;
 	int	cheapest;
 }		t_content;
+
+typedef struct s_op
+{
+	int	to_push;
+	int	biggest;
+	int	smallest;
+	int	big_index;
+	int	cheapest;
+}		t_op;
 
 char	**validate_args(int ac, char **av);
 void	destroy_content(void *content);

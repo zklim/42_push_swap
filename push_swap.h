@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:41:00 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/07 11:46:51 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/07 16:23:11 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ typedef struct s_content
 	int	smallest;
 	int	ra;
 	int	rb;
+	int	rr;
+	int	rra;
+	int	rrb;
+	int rrr;
 	int	cost;
 	int	cheapest;
 }		t_content;

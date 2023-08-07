@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 10:58:17 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/07 11:08:58 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/07 17:40:11 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	push_back_a(t_list **stack_a, t_list **stack_b, t_content *content)
 		while (content->pos--)
 			single_rotate(stack_a, "ra\n");
 	push(stack_b, stack_a, "pa\n");
+	print_stack(*stack_a);
+	print_stack(*stack_b);
 }
 
 int	smallest_pos(t_list *stack_a, int size)

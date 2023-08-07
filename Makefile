@@ -6,14 +6,14 @@
 #    By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/25 16:30:48 by zhlim             #+#    #+#              #
-#    Updated: 2023/08/05 18:25:03 by zhlim            ###   ########.fr        #
+#    Updated: 2023/08/07 08:54:37 by zhlim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS			= $(addsuffix .c, push_swap validate_args build_and_destroy_stacks error_handling operations run_operations \
-					sort_positive sort_negative sort)
+					 sort)
 SRCB			= $(addsuffix .c, checker validate_args build_and_destroy_stacks error_handling operations run_operations \
-					sort_positive sort_negative sort run_checker) $(addprefix libft/get_next_line/, $(addsuffix .c, get_next_line get_next_line_utils))
+					 sort run_checker) $(addprefix libft/get_next_line/, $(addsuffix .c, get_next_line get_next_line_utils))
 
 OBJS			= $(patsubst %.c, %.o, $(SRCS))
 OBJB			= $(patsubst %.c, %.o, $(SRCB))

@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:41:00 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/05 18:30:44 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/07 09:23:29 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ typedef struct s_content
 {
 	int	index;
 	int	number;
+	int	pos;
 	int	diff;
-	int	target_a;
 }		t_content;
 
 char	**validate_args(int ac, char **av);
@@ -49,9 +49,8 @@ void	push_back(t_list **stack_a, t_list **stack_b);
 int		check_sorted(t_list *stack_a);
 void	free_args(char **args);
 void	free_exit(t_list *stack);
-void	radix_sort(t_list **stack_a, t_list **stack_b, int size);
-void	sort_3(t_list **stack_a);
-void	sort_4_5(t_list **stack_a, t_list **stack_b, int size);
 void	print_stack(t_list *stack);
+void	sort_advance(t_list **stack_a, t_list **stack_b, int size);
+void	sort_3(t_list **stack_a);
 
 #endif

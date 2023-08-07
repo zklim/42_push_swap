@@ -6,18 +6,11 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:22:56 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/05 18:43:09 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/07 09:23:08 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	radix_sort(t_list **stack_a, t_list **stack_b, int size)
-{
-	sort_positive(stack_a, stack_b, size, 0);
-	if (has_negative(stack_a))
-		sort_negative(stack_a, stack_b, size, 0);
-}
 
 void	sort_3(t_list **stack_a)
 {
@@ -35,39 +28,40 @@ void	sort_3(t_list **stack_a)
 	}
 }
 
-void	search_and_push(t_list *tmp, t_content *content, t_list **stack_a,
-		t_list **stack_b)
+void	search_position(t_list *stack, t_content *content)
 {
-	while (tmp)
+	int	diff;
+	int	i;
+
+	i = 0;
+	content->diff = content->number;
+	while (stack)
 	{
-		if (content->number < extract_number(tmp->content))
+		diff = content->number - extract_number(stack->content);
+		if (diff > 0 && content->diff > diff)
 		{
-			push(stack_b, stack_a, "pa\n");
-			return ;
+			content->diff = diff;
+			content->pos = i;
 		}
-		else
-			single_rotate(stack_a, "ra\n");
-		tmp = tmp->next;
+		i++;
+		stack = stack->next;
 	}
 }
 
-void	sort_4_5(t_list **stack_a, t_list **stack_b, int size)
+void	push_back_a(t_list **stack_a, t_list **stack_b, t_content *content)
 {
-	t_list		*tmp;
-	t_content	*content;
+	while (content->pos--)
+		single_rotate(stack_a, "ra\n");
+	push(stack_b, stack_a, "pa\n");
+}
 
-	while (size != 3)
+void	sort_advance(t_list **stack_a, t_list **stack_b, int size)
+{
+	if (size == 4)
 	{
 		push(stack_a, stack_b, "pb\n");
-		size--;
+		sort_3(stack_a);
+		search_position(*stack_a, (*stack_b)->content);
+		push_back_a(stack_a, stack_b, (*stack_b)->content);
 	}
-	sort_3(stack_a);
-	while (*stack_b)
-	{
-		tmp = *stack_a;
-		content = (*stack_b)->content;
-		search_and_push(tmp, content, stack_a, stack_b);
-	}
-	while (!check_sorted(*stack_a))
-		single_rotate(stack_a, "ra\n");
 }

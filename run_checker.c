@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:01:16 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/05 18:24:41 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/07 12:10:26 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	check_command2(char *line, t_list **stack_a, t_list **stack_b)
 			single_rotate(stack_b, "rb\n");
 		else if (*line == 'r')
 		{
+			line++;
 			if (*line == 'a')
 				single_reverse_rotate(stack_a, "rra\n");
 			else if (*line == 'b')

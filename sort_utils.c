@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 09:26:45 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/09 17:11:14 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 01:29:28 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,6 @@ int	check_sorted(t_list *stack_a)
 		stack_a = stack_a->next;
 	}
 	return (1);
-}
-
-int	size_of(t_list *stack)
-{
-	int	i;
-
-	i = 0;
-	while (stack)
-	{
-		i++;
-		stack = stack->next;
-	}
-	return (i);
 }
 
 int	smallest_pos(t_list *stack, int size)

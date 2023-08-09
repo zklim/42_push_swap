@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 15:52:10 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/04 18:07:41 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 01:28:19 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,13 @@ int	main(int ac, char **av)
 	t_list	*stack_a;
 	t_list	*stack_b;
 	char	**args;
+	int		to_free;
 
-	args = validate_args(ac, av);
+	to_free = 0;
+	args = validate_args(ac, av, &to_free);
 	stack_a = build_stack_a(args);
+	if (to_free)
+		free_args(args);
 	stack_b = NULL;
 	check_dup(stack_a);
 	run_checker(&stack_a, &stack_b);

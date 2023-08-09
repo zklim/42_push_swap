@@ -1,0 +1,6 @@
+{
+	"files.associations": {
+		"*.cairo": "cairo",
+		"random": "c"
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:33:10 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/08 16:08:06 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 01:24:12 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	check_int(char *number)
 		sign = -1;
 		i++;
 	}
+	if ((number[i] <= '0' && number[i] >= '9') || !number[i])
+		print_error_exit("Error\n");
 	while (number[i] == '0')
 		i++;
 	while (number[i] >= '0' && number[i] <= '9')
@@ -64,7 +66,7 @@ void	check_int(char *number)
 		print_error_exit("Error\n");
 }
 
-char	**validate_args(int ac, char **av)
+char	**validate_args(int ac, char **av, int *to_free)
 {
 	int		i;
 	char	**args;
@@ -77,6 +79,7 @@ char	**validate_args(int ac, char **av)
 		if (!ft_strchr(av[1], ' '))
 			check_int(av[1]);
 		args = ft_split(av[1], ' ');
+		*to_free = 1;
 	}
 	else
 		args = av + 1;

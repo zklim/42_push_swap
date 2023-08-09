@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:41:00 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/09 17:00:22 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 01:29:23 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_content
 	int	rrb;
 	int	rrr;
 	int	cost;
-	int	push_b;
 }		t_content;
 
 typedef struct s_op
@@ -39,12 +38,11 @@ typedef struct s_op
 	int		big_index;
 	int		small_index;
 	int		i;
-	int		cost_1;
-	int		cost_2;
+	int		cost;
 	int		cheapest;
 }		t_op;
 
-char	**validate_args(int ac, char **av);
+char	**validate_args(int ac, char **av, int *to_free);
 void	destroy_content(void *content);
 t_list	*build_stack_a(char **args);
 void	print_error_exit(char *str);
@@ -71,7 +69,7 @@ void	free_exit(t_list *stack);
 void	print_stack(t_list *stack);
 void	sort_advance(t_list **stack_a, t_list **stack_b, int size);
 void	sort_3(t_list **stack_a);
-int		size_of(t_list *stack);
+int		ft_lstsize(t_list *stack);
 void	search_smallest(t_list *tmp, t_content *content);
 void	search_position(t_list *stack, t_content *content);
 int		smallest_pos(t_list *stack_a, int size);
@@ -84,5 +82,7 @@ void	to_push(t_list **stack_a, t_list **stack_b, int index, char c);
 void	run_op(t_list **stack_a, t_list **stack_b, t_content *content, char c);
 void	run_op2(t_list **stack_a, t_list **stack_b, t_content *content, char c);
 void	check_double(t_content *content, t_op *op);
+void	calculate_rev_b(t_list *stack_a, t_list *stack_b, t_op *op);
+void	get_big_small_b(t_list *stack, t_op *op);
 
 #endif

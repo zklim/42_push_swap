@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:22:56 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/09 17:21:00 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 01:29:30 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	sort_3(t_list **stack_a)
 {
 	int	nbr;
 
-	if (size_of(*stack_a) != 3)
+	if (ft_lstsize(*stack_a) != 3)
 		return ;
 	while (!check_sorted(*stack_a))
 	{

@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:41:00 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/09 16:07:27 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/09 16:22:51 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ void	search_position(t_list *stack, t_content *content);
 int		smallest_pos(t_list *stack_a, int size);
 void	calculate_cost(t_list *stack_a, t_list *stack_b, t_op *op);
 void	optimised_push_b(t_list **stack_a, t_list **stack_b);
+void	init_op(t_op *op);
 
 #endif

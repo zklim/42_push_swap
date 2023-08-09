@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 16:38:04 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/10 01:21:35 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 01:43:18 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ void	check_double(t_content *content, t_op *op)
 void	calculate_cost_b(t_list *stack_a, t_list *stack_b, t_op *op)
 {
 	t_content	*content_a;
-	// t_list		*head_a;
+	t_list		*head_a;
 
-	// head_a = stack_a;
+	head_a = stack_a;
 	while ((op->i < op->cheapest && stack_a) || op->i == 0)
 	{
 		content_a = stack_a->content;

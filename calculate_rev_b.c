@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 19:33:30 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/09 19:50:23 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 01:41:47 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,22 @@ int	get_revcost_b(t_content *content, t_list *stack_b, t_op *op)
 	return (content->cost);
 }
 
+void	do_nothing(t_content *content)
+{
+	return ;
+}
 
 void	calculate_rev_b(t_list *stack_a, t_list *stack_b, t_op *op)
 {
+	t_list		*rev_a;
 	t_content	*content_a;
 
-	stack_a = reverse_list(stack_a);
+	rev_a = ft_lstmap(stack_a, do_nothing, destroy_content);
+	rev_a = reverse_list(rev_a);
 	op->i = 1;
-	while (op->i < op->cheapest && stack_a)
+	while (op->i < op->cheapest && rev_a)
 	{
-		content_a = stack_a->content;
+		content_a = rev_a->content;
 		content_a->rra = op->i;
 		content_a->rrr = 0;
 		op->cost = get_revcost_b(content_a, stack_b, op);
@@ -89,6 +95,6 @@ void	calculate_rev_b(t_list *stack_a, t_list *stack_b, t_op *op)
 			op->to_push = op->i;
 		}
 		op->i++;
-		stack_a = stack_a->next;
+		rev_a = rev_a->next;
 	}
 }

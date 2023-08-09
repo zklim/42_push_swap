@@ -6,20 +6,22 @@
 #    By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/25 16:30:48 by zhlim             #+#    #+#              #
-#    Updated: 2023/08/07 10:58:38 by zhlim            ###   ########.fr        #
+#    Updated: 2023/08/08 17:53:03 by zhlim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS			= $(addsuffix .c, push_swap validate_args build_and_destroy_stacks error_handling operations run_operations \
-					 sort sort_2 sort_utils)
+					 sort sort_2 optimised_push calculate_cost sort_utils)
 SRCB			= $(addsuffix .c, checker validate_args build_and_destroy_stacks error_handling operations run_operations \
-					 sort sort_2 sort_utils run_checker) $(addprefix libft/get_next_line/, $(addsuffix .c, get_next_line get_next_line_utils))
+					 sort sort_2 optimised_push calculate_cost sort_utils run_checker) \
+					 $(addprefix libft/get_next_line/, $(addsuffix .c, get_next_line get_next_line_utils))
 
 OBJS			= $(patsubst %.c, %.o, $(SRCS))
 OBJB			= $(patsubst %.c, %.o, $(SRCB))
 
 CC				= gcc
-CFLAGS			= -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS			= -Wall -Werror -Wextra -g
+# -fsanitize=address
 
 RM				= rm -f
 

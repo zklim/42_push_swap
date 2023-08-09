@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 10:58:17 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/07 22:47:07 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/08 16:08:10 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	sort_3(t_list **stack_a)
 		return ;
 	while (!check_sorted(*stack_a))
 	{
-		nbr = extract_number((*stack_a)->content);
-		if (nbr > extract_number(ft_lstlast(*stack_a)->content))
+		nbr = get_number((*stack_a)->content);
+		if (nbr > get_number(ft_lstlast(*stack_a)->content))
 			single_rotate(stack_a, "ra\n");
-		else if (nbr > extract_number((*stack_a)->next->content))
+		else if (nbr > get_number((*stack_a)->next->content))
 			single_swap(stack_a, "sa\n");
 		else
 			single_rotate(stack_a, "ra\n");
@@ -37,11 +37,11 @@ void	search_smallest(t_list *tmp, t_content *content)
 	t_content	*tmp_content;
 
 	i = 0;
-	content->diff = content->number - extract_number(tmp->content);
+	content->diff = content->number - get_number(tmp->content);
 	content->pos = i;
 	while (tmp)
 	{
-		diff = content->number - extract_number(tmp->content);
+		diff = content->number - get_index(tmp->content);
 		if (content->diff <= diff)
 		{
 			content->pos = i;
@@ -62,7 +62,7 @@ void	search_position(t_list *stack_a, t_content *content_b)
 	tmp = stack_a;
 	while (stack_a)
 	{
-		if (content_b->number < extract_number(stack_a->content))
+		if (content_b->number < get_number(stack_a->content))
 		{
 			content_b->pos = i;
 			return ;

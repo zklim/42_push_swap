@@ -6,12 +6,29 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:22:56 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/09 15:24:10 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/09 16:07:30 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	sort_3(t_list **stack_a)
+{
+	int	nbr;
+
+	if (size_of(*stack_a) != 3)
+		return ;
+	while (!check_sorted(*stack_a))
+	{
+		nbr = get_number((*stack_a)->content);
+		if (nbr > get_number(ft_lstlast(*stack_a)->content))
+			single_rotate(stack_a, "ra\n");
+		else if (nbr > get_number((*stack_a)->next->content))
+			single_swap(stack_a, "sa\n");
+		else
+			single_rotate(stack_a, "ra\n");
+	}
+}
 
 void	set_head(t_list **stack_a, int size)
 {
@@ -30,25 +47,15 @@ void	set_head(t_list **stack_a, int size)
 void	sort_advance(t_list **stack_a, t_list **stack_b, int size)
 {
 	if (size == 4)
-	{
 		push(stack_a, stack_b, "pb\n");
-		sort_3(stack_a);
-		search_position(*stack_a, (*stack_b)->content);
-		push_back_a(stack_a, stack_b, (*stack_b)->content);
-	}
 	else
 	{
 		push(stack_a, stack_b, "pb\n");
 		push(stack_a, stack_b, "pb\n");
-		optimised_push(stack_a, stack_b);
-		sort_3(stack_a);
-		print_stack(*stack_a);
-		print_stack(*stack_b);	
-		while (*stack_b)
-		{
-			search_position(*stack_a, (*stack_b)->content);
-			push_back_a(stack_a, stack_b, (*stack_b)->content);
-		}
+		optimised_push_b(stack_a, stack_b);
 	}
+	sort_3(stack_a);
+	print_stack(*stack_a);
+	print_stack(*stack_b);
 	set_head(stack_a, size);
 }

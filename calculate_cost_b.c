@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calculate_cost.c                                   :+:      :+:    :+:   */
+/*   calculate_cost_b.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/08 16:05:22 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/09 16:33:49 by zhlim            ###   ########.fr       */
+/*   Created: 2023/08/09 16:38:04 by zhlim             #+#    #+#             */
+/*   Updated: 2023/08/09 17:20:03 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	get_big_small(t_list *stack, t_op *op)
+void	get_big_small_b(t_list *stack, t_op *op)
 {
 	t_list		*tmp;
 	int			i;
@@ -43,30 +43,32 @@ void	get_big_small(t_list *stack, t_op *op)
 
 void	get_cost_b2(t_content *content, t_list *stack_b)
 {
-	int			i;
-	t_insert	ins;
+	int	i;
+	int	current;
+	int	next_small;
+	int	next_small_idx;
 
 	i = 0;
-	ins.next_small_idx = -1;
+	next_small_idx = -1;
 	while (stack_b)
 	{
-		ins.current = get_number(stack_b->content);
-		if (ins.current < content->number && 
-			(ins.next_small_idx == -1 || ins.current > ins.next_small))
+		current = get_number(stack_b->content);
+		if (current < content->number && 
+			(next_small_idx == -1 || current > next_small))
 		{
-			ins.next_small = ins.current;
-			ins.next_small_idx = i;
+			next_small = current;
+			next_small_idx = i;
 		}
 		i++;
 		stack_b = stack_b->next;
 	}
-	content->rb = ins.next_small_idx;
-	content->cost = ins.next_small_idx;
+	content->rb = next_small_idx;
+	content->cost = next_small_idx;
 }
 
 int	get_cost_b(t_content *content, t_list *stack_b, t_op *op)
 {
-	get_big_small(stack_b, op);
+	get_big_small_b(stack_b, op);
 	if (content->number < op->smallest)
 	{
 		content->rb = op->big_index;
@@ -95,11 +97,11 @@ void	check_double(t_content *content, t_op *op)
 		+ content->rrb + content->rra + content->rrr;
 }
 
-void	calculate_cost(t_list *stack_a, t_list *stack_b, t_op *op)
+void	calculate_cost_b(t_list *stack_a, t_list *stack_b, t_op *op)
 {
 	t_content	*content_a;
 
-	while ((op->cost_1 < op->cheapest && stack_a) || op->i == 0)
+	while ((op->i < op->cheapest && stack_a) || op->i == 0)
 	{
 		content_a = stack_a->content;
 		content_a->ra = op->i;
@@ -110,7 +112,7 @@ void	calculate_cost(t_list *stack_a, t_list *stack_b, t_op *op)
 		{
 			op->cost_1 = get_cost_b(content_a, stack_b, op);
 			check_double(content_a, op);
-			if (op->cost_1 < op->cheapest || op->cheapest == -1)
+			if (op->cost_1 < op->cheapest)
 			{
 				op->cheapest = op->cost_1;
 				op->to_push = op->i;

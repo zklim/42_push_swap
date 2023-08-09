@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:41:00 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/09 16:22:51 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/09 17:00:22 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,12 @@ typedef struct s_op
 	int		biggest;
 	int		smallest;
 	int		big_index;
+	int		small_index;
 	int		i;
 	int		cost_1;
 	int		cost_2;
 	int		cheapest;
 }		t_op;
-
-typedef struct s_insert
-{
-	int	current;
-	int	next_small;
-	int	next_small_idx;
-}		t_insert;
 
 char	**validate_args(int ac, char **av);
 void	destroy_content(void *content);
@@ -81,8 +75,14 @@ int		size_of(t_list *stack);
 void	search_smallest(t_list *tmp, t_content *content);
 void	search_position(t_list *stack, t_content *content);
 int		smallest_pos(t_list *stack_a, int size);
-void	calculate_cost(t_list *stack_a, t_list *stack_b, t_op *op);
+void	calculate_cost_a(t_list *stack_a, t_list *stack_b, t_op *op);
+void	calculate_cost_b(t_list *stack_a, t_list *stack_b, t_op *op);
+void	optimised_push_a(t_list **stack_a, t_list **stack_b);
 void	optimised_push_b(t_list **stack_a, t_list **stack_b);
 void	init_op(t_op *op);
+void	to_push(t_list **stack_a, t_list **stack_b, int index, char c);
+void	run_op(t_list **stack_a, t_list **stack_b, t_content *content, char c);
+void	run_op2(t_list **stack_a, t_list **stack_b, t_content *content, char c);
+void	check_double(t_content *content, t_op *op);
 
 #endif

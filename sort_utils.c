@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 09:26:45 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/09 16:03:42 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/09 17:11:14 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,24 @@ int	size_of(t_list *stack)
 	return (i);
 }
 
-int	smallest_pos(t_list *stack_a, int size)
+int	smallest_pos(t_list *stack, int size)
 {
-	t_content	*content;
-	int			i;
+	t_op	op;
 
-	i = 0;
-	while (stack_a)
+	init_op(&op);
+	op.smallest = get_number(stack->content);
+	op.small_index = op.i;
+	while (stack)
 	{
-		content = stack_a->content;
-		if (content->smallest)
-			break ;
-		i++;
-		stack_a = stack_a->next;
+		if (get_number(stack->content) < op.smallest)
+		{
+			op.smallest = get_number(stack->content);
+			op.small_index = op.i;
+		}
+		op.i++;
+		stack = stack->next;
 	}
-	if (i < (size / 2) + 1)
+	if (op.small_index < (size / 2) + 1)
 		return (1);
 	else
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:04:21 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/09 16:26:04 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/09 17:20:49 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	init_op(t_op *op)
 	op->biggest = 0;
 	op->smallest = 0;
 	op->big_index = 0;
+	op->small_index = 0;
 	op->i = 0;
 	op->cost_1 = 0;
 	op->cost_2 = 0;
@@ -99,9 +100,7 @@ void	optimised_push_b(t_list **stack_a, t_list **stack_b)
 	while (size_of(*stack_a) != 3)
 	{
 		init_op(&op);
-		calculate_cost(*stack_a, *stack_b, &op);
+		calculate_cost_b(*stack_a, *stack_b, &op);
 		to_push(stack_a, stack_b, op.to_push, 'b');
-		print_stack(*stack_a);
-		print_stack(*stack_b);
 	}
 }

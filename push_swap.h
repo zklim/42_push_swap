@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:41:00 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/10 11:26:01 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 13:15:51 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,10 @@ void	run_op(t_list **stack_a, t_list **stack_b, t_content *content, char c);
 void	run_op2(t_list **stack_a, t_list **stack_b, t_content *content, char c);
 void	check_double(t_content *content, t_op *op);
 void	calculate_rev_b(t_list *stack_a, t_list *stack_b, t_op *op);
+void	calculate_rev_a(t_list *stack_a, t_list *stack_b, t_op *op);
+void	get_big_small_a(t_list *stack, t_op *op);
 void	get_big_small_b(t_list *stack, t_op *op);
 void	clear_op(t_content *content);
+t_list	*move_stack(t_list *stack, t_op *op, int half);
 
 #endif

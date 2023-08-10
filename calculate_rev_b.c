@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 19:33:30 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/10 11:25:49 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 13:16:01 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,27 +64,35 @@ int	get_revcost_b(t_content *content, t_list *stack_b, t_op *op)
 	return (content->cost);
 }
 
+t_list	*move_stack(t_list *stack, t_op *op, int half)
+{
+	op->i = 0;
+	if (ft_lstsize(stack) % 2 != 0)
+	{
+		while (op->i < half + 1)
+		{
+			stack = stack->next;
+			op->i++;
+		}
+	}
+	else
+	{
+		while (op->i < half)
+		{
+			stack = stack->next;
+			op->i++;
+		}
+	}
+	return (stack);
+}
+
 void	calculate_rev_b(t_list *stack_a, t_list *stack_b, t_op *op)
 {
 	t_content	*content_a;
 	int			half;
 
-	op->i = 0;
 	half = ft_lstsize(stack_a) / 2;
-	if (ft_lstsize(stack_a) % 2 != 0)
-	{
-		while (op->i < half + 1)
-		{
-			stack_a = stack_a->next;
-			op->i++;
-		}
-	}
-	else
-		while (op->i < half)
-		{
-			stack_a = stack_a->next;
-			op->i++;
-		}
+	stack_a = move_stack(stack_a, op, half);
 	while (stack_a)
 	{
 		content_a = stack_a->content;

@@ -6,15 +6,15 @@
 #    By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/25 16:30:48 by zhlim             #+#    #+#              #
-#    Updated: 2023/08/09 19:52:25 by zhlim            ###   ########.fr        #
+#    Updated: 2023/08/10 13:15:30 by zhlim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS			= $(addsuffix .c, push_swap validate_args build_and_destroy_stacks error_handling operations run_operations \
-					 sort optimised_push_a optimised_push_b calculate_cost_a calculate_cost_b calculate_rev_b sort_utils)
-SRCB			= $(addsuffix .c, checker validate_args build_and_destroy_stacks error_handling operations run_operations \
-					 sort optimised_push_a optimised_push_b calculate_cost_a calculate_cost_b calculate_rev_b sort_utils run_checker) \
-					 $(addprefix libft/get_next_line/, $(addsuffix .c, get_next_line get_next_line_utils))
+SRCS			= $(addsuffix .c, push_swap validate_args build_and_destroy_stacks error_handling operations run_operations sort \
+					 optimised_push_a optimised_push_b calculate_cost_a calculate_cost_b calculate_rev_a calculate_rev_b sort_utils)
+SRCB			= $(addsuffix .c, checker validate_args build_and_destroy_stacks error_handling operations run_operations sort \
+					 optimised_push_a optimised_push_b calculate_cost_a calculate_cost_b calculate_rev_a calculate_rev_b \
+					 sort_utils run_checker) $(addprefix libft/get_next_line/, $(addsuffix .c, get_next_line get_next_line_utils))
 
 OBJS			= $(patsubst %.c, %.o, $(SRCS))
 OBJB			= $(patsubst %.c, %.o, $(SRCB))

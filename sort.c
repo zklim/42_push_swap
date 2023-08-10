@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:22:56 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/10 13:17:22 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 17:09:55 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,5 @@ void	sort_advance(t_list **stack_a, t_list **stack_b, int size)
 	}
 	sort_3(stack_a);
 	optimised_push_a(stack_a, stack_b);
-	print_stack(*stack_a);
 	set_head(stack_a, size);
 }

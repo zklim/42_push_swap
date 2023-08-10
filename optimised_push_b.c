@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:04:21 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/10 11:39:41 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 17:09:50 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	run_op2(t_list **stack_a, t_list **stack_b, t_content *content, char c)
 {
 	if (content->rrb)
 	{
-		single_reverse_rotate(stack_a, "rrb\n");
+		single_reverse_rotate(stack_b, "rrb\n");
 		content->rrb--;
 	}
 	else if (content->rrr)

@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:04:21 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/10 13:16:34 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 17:09:47 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,5 @@ void	optimised_push_a(t_list **stack_a, t_list **stack_b)
 		init_op(&op);
 		calculate_cost_a(*stack_a, *stack_b, &op);
 		to_push(stack_a, stack_b, op.to_push, 'a');
-		print_stack(*stack_a);
-		print_stack(*stack_b);
 	}
 }

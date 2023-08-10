@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:41:00 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/10 13:15:51 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 16:38:35 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ typedef struct s_content
 {
 	int	index;
 	int	number;
-	int	smallest;
 	int	ra;
 	int	rb;
 	int	rr;
@@ -88,5 +87,10 @@ void	get_big_small_a(t_list *stack, t_op *op);
 void	get_big_small_b(t_list *stack, t_op *op);
 void	clear_op(t_content *content);
 t_list	*move_stack(t_list *stack, t_op *op, int half);
+void	calculate_cost_b2(t_list *stack_a, t_list *stack_b, t_op *op);
+void	calculate_cost_a2(t_list *stack_a, t_list *stack_b, t_op *op);
+int		get_revcost_a(t_content *content, t_list *stack_a, t_op *op);
+int		get_revcost_b(t_content *content, t_list *stack_a, t_op *op);
+void	copy_content(t_content *src, t_content *dst, int clear);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 19:33:30 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/10 13:16:01 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 16:35:54 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,22 +88,22 @@ t_list	*move_stack(t_list *stack, t_op *op, int half)
 
 void	calculate_rev_b(t_list *stack_a, t_list *stack_b, t_op *op)
 {
-	t_content	*content_a;
+	t_content	content_a;
 	int			half;
 
 	half = ft_lstsize(stack_a) / 2;
 	stack_a = move_stack(stack_a, op, half);
 	while (stack_a)
 	{
-		content_a = stack_a->content;
-		clear_op(content_a);
-		content_a->rra = half;
-		op->cost = get_revcost_b(content_a, stack_b, op);
-		check_double(content_a, op);
+		copy_content(stack_a->content, &content_a, 1);
+		content_a.rra = half;
+		op->cost = get_revcost_b(&content_a, stack_b, op);
+		check_double(&content_a, op);
 		if (op->cost < op->cheapest)
 		{
 			op->cheapest = op->cost;
 			op->to_push = op->i;
+			copy_content(&content_a, stack_a->content, 0);
 		}
 		op->i++;
 		half--;

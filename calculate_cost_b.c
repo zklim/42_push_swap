@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 16:38:04 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/10 11:26:26 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 17:08:00 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,49 +79,39 @@ int	get_cost_b(t_content *content, t_list *stack_b, t_op *op)
 	return (content->cost);
 }
 
-void	check_double(t_content *content, t_op *op)
+void	calculate_b(t_content *content_a, t_list *stack_a, t_list *stack_b,
+		t_op *op)
 {
-	while (content->rb && content->ra)
+	op->cost = get_cost_b(content_a, stack_b, op);
+	check_double(content_a, op);
+	if (op->cost < op->cheapest)
 	{
-		content->rb--;
-		content->ra--;
-		content->rr++;
+		op->cheapest = op->cost;
+		op->to_push = op->i;
+		copy_content(content_a, stack_a->content, 0);
 	}
-	while (content->rrb && content->rra)
-	{
-		content->rrb--;
-		content->rra--;
-		content->rrr++;
-	}
-	op->cost = content->rb + content->ra + content->rr
-		+ content->rrb + content->rra + content->rrr;
 }
 
 void	calculate_cost_b(t_list *stack_a, t_list *stack_b, t_op *op)
 {
-	t_content	*content_a;
+	t_content	content_a;
 	t_list		*head_a;
 
 	head_a = stack_a;
 	while ((op->i < op->cheapest && stack_a) || op->i == 0)
 	{
-		content_a = stack_a->content;
-		clear_op(content_a);
-		content_a->ra = op->i;
+		copy_content(stack_a->content, &content_a, 1);
+		content_a.ra = op->i;
 		if (op->i == 0)
-			op->cheapest = get_cost_b(content_a, stack_b, op);
-		else
 		{
-			op->cost = get_cost_b(content_a, stack_b, op);
-			check_double(content_a, op);
-			if (op->cost < op->cheapest)
-			{
-				op->cheapest = op->cost;
-				op->to_push = op->i;
-			}
+			op->cheapest = get_cost_b(&content_a, stack_b, op);
+			copy_content(&content_a, stack_a->content, 0);
 		}
+		else
+			calculate_b(&content_a, stack_a, stack_b, op);
 		op->i++;
 		stack_a = stack_a->next;
 	}
+	calculate_cost_b2(head_a, stack_b, op);
 	calculate_rev_b(head_a, stack_b, op);
 }

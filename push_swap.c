@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:40:20 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/10 01:25:24 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 23:47:01 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@ void	print_stack(t_list *stack)
 
 void	do_sort(t_list **stack_a, t_list **stack_b, int size)
 {
-	if (size <= 3)
+	if (size == 2)
+	{
+		while (!check_sorted(*stack_a))
+			single_rotate(stack_a, "ra\n");
+	}
+	else if (size <= 3)
 		sort_3(stack_a);
 	else
 		sort_advance(stack_a, stack_b, size);

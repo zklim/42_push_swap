@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 16:38:04 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/10 01:43:18 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 11:26:26 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ void	calculate_cost_b(t_list *stack_a, t_list *stack_b, t_op *op)
 	while ((op->i < op->cheapest && stack_a) || op->i == 0)
 	{
 		content_a = stack_a->content;
+		clear_op(content_a);
 		content_a->ra = op->i;
-		content_a->rr = 0;
 		if (op->i == 0)
 			op->cheapest = get_cost_b(content_a, stack_b, op);
 		else
@@ -123,5 +123,5 @@ void	calculate_cost_b(t_list *stack_a, t_list *stack_b, t_op *op)
 		op->i++;
 		stack_a = stack_a->next;
 	}
-	// calculate_rev_b(head_a, stack_b, op);
+	calculate_rev_b(head_a, stack_b, op);
 }

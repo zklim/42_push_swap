@@ -6,32 +6,23 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 19:33:30 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/10 01:41:47 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 11:25:49 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*reverse_list(t_list *stack)
+void	clear_op(t_content *content)
 {
-	t_list	*current;
-	t_list	*prev;
-	t_list	*next;
-
-	current = stack;
-	prev = NULL;
-	while (current != NULL)
-	{
-		next = current->next;
-		current->next = prev;
-		prev = current;
-		current = next;
-	}
-
-	return (prev);
+	content->ra = 0;
+	content->rb = 0;
+	content->rr = 0;
+	content->rra = 0;
+	content->rrb = 0;
+	content->rrr = 0;
 }
 
-void	get_revcost_b2(t_content *content, t_list *stack_b)
+void	get_revcost_b2(t_content *content, t_list *stack_b, int size)
 {
 	int	i;
 	int	current;
@@ -52,41 +43,53 @@ void	get_revcost_b2(t_content *content, t_list *stack_b)
 		i++;
 		stack_b = stack_b->next;
 	}
-	content->rrb = next_small_idx;
-	content->cost = next_small_idx;
+	content->rrb = size - next_small_idx;
 }
 
 int	get_revcost_b(t_content *content, t_list *stack_b, t_op *op)
 {
+	int		size;
+
+	size = ft_lstsize(stack_b);
 	get_big_small_b(stack_b, op);
 	if (content->number < op->smallest)
 	{
-		content->rrb = op->big_index;
-		content->cost = op->big_index;
+		if (op->big_index == 0)
+			content->rrb = 0;
+		else
+			content->rrb = size - op->big_index;
 	}
 	else
-		get_revcost_b2(content, stack_b);
+		get_revcost_b2(content, stack_b, size);
 	return (content->cost);
-}
-
-void	do_nothing(t_content *content)
-{
-	return ;
 }
 
 void	calculate_rev_b(t_list *stack_a, t_list *stack_b, t_op *op)
 {
-	t_list		*rev_a;
 	t_content	*content_a;
+	int			half;
 
-	rev_a = ft_lstmap(stack_a, do_nothing, destroy_content);
-	rev_a = reverse_list(rev_a);
-	op->i = 1;
-	while (op->i < op->cheapest && rev_a)
+	op->i = 0;
+	half = ft_lstsize(stack_a) / 2;
+	if (ft_lstsize(stack_a) % 2 != 0)
 	{
-		content_a = rev_a->content;
-		content_a->rra = op->i;
-		content_a->rrr = 0;
+		while (op->i < half + 1)
+		{
+			stack_a = stack_a->next;
+			op->i++;
+		}
+	}
+	else
+		while (op->i < half)
+		{
+			stack_a = stack_a->next;
+			op->i++;
+		}
+	while (stack_a)
+	{
+		content_a = stack_a->content;
+		clear_op(content_a);
+		content_a->rra = half;
 		op->cost = get_revcost_b(content_a, stack_b, op);
 		check_double(content_a, op);
 		if (op->cost < op->cheapest)
@@ -95,6 +98,7 @@ void	calculate_rev_b(t_list *stack_a, t_list *stack_b, t_op *op)
 			op->to_push = op->i;
 		}
 		op->i++;
-		rev_a = rev_a->next;
+		half--;
+		stack_a = stack_a->next;
 	}
 }

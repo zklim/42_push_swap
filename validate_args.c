@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:33:10 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/04 18:14:54 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/10 01:24:12 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	check_dup(t_list *stack)
 		loop = top;
 		while (loop)
 		{
-			if (extract_index(loop->content) == extract_index(stack->content))
+			if (get_index(loop->content) == get_index(stack->content))
 			{
 				loop = loop->next;
 				if (!loop)
 					break ;
 			}
-			else if (extract_number(loop->content)
-				== extract_number(stack->content))
+			else if (get_number(loop->content)
+				== get_number(stack->content))
 				free_error_exit("Error\n", top);
 			loop = loop->next;
 		}
@@ -52,6 +52,8 @@ void	check_int(char *number)
 		sign = -1;
 		i++;
 	}
+	if ((number[i] <= '0' && number[i] >= '9') || !number[i])
+		print_error_exit("Error\n");
 	while (number[i] == '0')
 		i++;
 	while (number[i] >= '0' && number[i] <= '9')
@@ -64,7 +66,7 @@ void	check_int(char *number)
 		print_error_exit("Error\n");
 }
 
-char	**validate_args(int ac, char **av)
+char	**validate_args(int ac, char **av, int *to_free)
 {
 	int		i;
 	char	**args;
@@ -77,6 +79,7 @@ char	**validate_args(int ac, char **av)
 		if (!ft_strchr(av[1], ' '))
 			check_int(av[1]);
 		args = ft_split(av[1], ' ');
+		*to_free = 1;
 	}
 	else
 		args = av + 1;

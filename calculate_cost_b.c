@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 16:38:04 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/10 17:08:00 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/11 11:39:27 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	get_cost_b2(t_content *content, t_list *stack_b)
 	while (stack_b)
 	{
 		current = get_number(stack_b->content);
-		if (current < content->number && 
-			(next_small_idx == -1 || current > next_small))
+		if (current < content->number && (next_small_idx == -1
+				|| current > next_small))
 		{
 			next_small = current;
 			next_small_idx = i;

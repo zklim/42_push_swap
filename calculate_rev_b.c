@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 19:33:30 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/10 16:35:54 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/11 11:39:48 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	get_revcost_b2(t_content *content, t_list *stack_b, int size)
 	while (stack_b)
 	{
 		current = get_number(stack_b->content);
-		if (current < content->number && 
-			(next_small_idx == -1 || current > next_small))
+		if (current < content->number && (next_small_idx == -1
+				|| current > next_small))
 		{
 			next_small = current;
 			next_small_idx = i;

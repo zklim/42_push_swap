@@ -6,7 +6,7 @@
 /*   By: zhlim <zhlim@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:41:00 by zhlim             #+#    #+#             */
-/*   Updated: 2023/08/10 16:38:35 by zhlim            ###   ########.fr       */
+/*   Updated: 2023/08/11 11:34:15 by zhlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ typedef struct s_content
 
 typedef struct s_op
 {
-	int		to_push;
-	int		biggest;
-	int		smallest;
-	int		big_index;
-	int		small_index;
-	int		i;
-	int		cost;
-	int		cheapest;
+	int	to_push;
+	int	biggest;
+	int	smallest;
+	int	big_index;
+	int	small_index;
+	int	i;
+	int	cost;
+	int	cheapest;
 }		t_op;
 
 char	**validate_args(int ac, char **av, int *to_free);
